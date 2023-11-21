@@ -21,11 +21,12 @@ func (comp *Client) Translate(ctx context.Context, param *request.RequestGeneral
 		param.AppId = comp.BaseClient.Config.AppID
 	}
 
-	data, _ := object.StructToHashMap(param)
+	data, _ := object.StructToStringMap(param)
 	salt := kernel.GenerateSalt()
 	(*data)["sign"] = kernel.GenerateSignature(param.AppId, param.Query, salt, comp.BaseClient.Config.AppSecret)
 	(*data)["salt"] = salt
-	_, err := comp.BaseClient.HttpPost(ctx, "api/trans/vip/translate", data, nil, result)
+	//_, err := comp.BaseClient.HttpPost(ctx, "api/trans/vip/translate", data, nil, result)
+	_, err := comp.BaseClient.HttpGet(ctx, "api/trans/vip/translate", data, nil, result)
 
 	return result, err
 }
