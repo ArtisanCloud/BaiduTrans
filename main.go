@@ -1,29 +1,10 @@
-# BaiduTrans
-
-
-
-官方文档：  
-https://api.fanyi.baidu.com/  
-https://api.fanyi.baidu.com/doc/21
-
-
-通用翻译API HTTPS 地址：  
-https://fanyi-api.baidu.com/api/trans/vip/translate
-
-
-```shell
-go get -u github.com/ArtisanCloud/BaiduTrans
-```
-
-```go
-
 package main
 
 import (
+	"context"
 	"github.com/ArtisanCloud/BaiduTrans/config"
 	"github.com/ArtisanCloud/BaiduTrans/trans/general"
 	"github.com/ArtisanCloud/BaiduTrans/trans/general/request"
-	"context"
 	"github.com/ArtisanCloud/PowerLibs/v3/fmt"
 )
 
@@ -54,9 +35,3 @@ func main() {
 
 	return
 }
-```
-
-## 更多产品：
-PowerWechat: https://github.com/ArtisanCloud/PowerWeChat  
-PowerX: https://github.com/ArtisanCloud/PowerX
-
