@@ -27,6 +27,7 @@ type BaseClient struct {
 
 func NewBaseClient(config *config.BaiduTranslateConfig) (*BaseClient, error) {
 	baseUri := "https://fanyi-api.baidu.com"
+	//baseUri := "http://api.fanyi.baidu.com"
 	if config.BaseUri != "" {
 		baseUri = config.BaseUri
 	}
@@ -69,6 +70,20 @@ func (client *BaseClient) RegisterHttpMiddlewares() {
 	client.HttpHelper.WithMiddleware(
 		logMiddleware(logger),
 		helper.HttpDebugMiddleware(client.Config.HttpDebug),
+	)
+}
+
+func (client *BaseClient) HttpGet(ctx context.Context, url string, query *object.StringMap, outHeader interface{}, outBody interface{}) (interface{}, error) {
+	return client.Request(
+		ctx,
+		url,
+		http.MethodGet,
+		&object.HashMap{
+			"query": query,
+		},
+		false,
+		outHeader,
+		outBody,
 	)
 }
 
@@ -182,9 +197,5 @@ func (client *BaseClient) Request(ctx context.Context, uri string, method string
 	}
 
 	return response, err
-
-}
-
-func AuthSignRequest() {
 
 }
